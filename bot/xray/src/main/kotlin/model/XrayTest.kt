@@ -31,5 +31,5 @@ data class XrayTest(
         return precondition.isEmpty() || precondition.any { it.supportConf(conf) }
     }
 
-    fun findUserInterface(): UserInterfaceType = precondition.mapNotNull { it.findUserInterface() }.firstOrNull() ?: textChat
+    fun findUserInterface(): UserInterfaceType = precondition.firstNotNullOfOrNull { it.findUserInterface() } ?: textChat
 }

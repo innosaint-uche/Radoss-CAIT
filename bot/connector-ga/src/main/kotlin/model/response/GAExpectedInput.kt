@@ -30,7 +30,7 @@ data class GAExpectedInput(
     fun toGenericMessage(): GenericMessage? =
         inputPrompt.toGenericMessage()
             .let {
-                val intentElement = possibleIntents.map { it.toGenericMessage() }.filterNotNull().firstOrNull()
+                val intentElement = possibleIntents.firstNotNullOfOrNull { it.toGenericMessage() }
                 if (it == null) {
                     intentElement
                 } else if (intentElement == null) {

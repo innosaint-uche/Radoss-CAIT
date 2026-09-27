@@ -302,7 +302,7 @@ fun ChatCard.toCardMessage(): Message =
     Message().setCards(
         mutableListOf(
             Card()
-                .setHeader(children.mapNotNull { it as? ChatHeader }.firstOrNull()?.toCardHeader())
+                .setHeader(children.firstNotNullOfOrNull { it as? ChatHeader }?.toCardHeader())
                 .setSections(children.mapNotNull { it as? ChatSection }.map { it.toSection() }),
         ),
     )

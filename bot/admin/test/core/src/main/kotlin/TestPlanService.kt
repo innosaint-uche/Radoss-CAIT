@@ -326,8 +326,7 @@ object TestPlanService {
         }
 
         return messages.zip(expectedMessage.messages)
-            .mapNotNull { (subMessage, expectedSubMessage) -> subMessage.partiallyEquals(expectedSubMessage) }
-            .firstOrNull()
+            .firstNotNullOfOrNull { (subMessage, expectedSubMessage) -> subMessage.partiallyEquals(expectedSubMessage) }
     }
 }
 
@@ -337,12 +336,10 @@ private fun ClientGenericMessage.partiallyEquals(expected: ClientGenericMessage)
     }
 
     choices.zip(expected.choices)
-        .mapNotNull { (obtainedChoice, expectedChoice) -> obtainedChoice.partiallyEquals(expectedChoice) }
-        .firstOrNull()?.let { return it }
+        .firstNotNullOfOrNull { (obtainedChoice, expectedChoice) -> obtainedChoice.partiallyEquals(expectedChoice) }?.let { return it }
 
     subElements.zip(expected.subElements)
-        .mapNotNull { (obtainedSubElement, expectedSubElement) -> obtainedSubElement.partiallyEquals(expectedSubElement) }
-        .firstOrNull()?.let { return it }
+        .firstNotNullOfOrNull { (obtainedSubElement, expectedSubElement) -> obtainedSubElement.partiallyEquals(expectedSubElement) }?.let { return it }
 
     return null
 }
@@ -353,8 +350,7 @@ private fun ClientGenericElement.partiallyEquals(expected: ClientGenericElement)
     }
 
     return choices.zip(expected.choices)
-        .mapNotNull { (obtainedChoice, expectedChoice) -> obtainedChoice.partiallyEquals(expectedChoice) }
-        .firstOrNull()
+        .firstNotNullOfOrNull { (obtainedChoice, expectedChoice) -> obtainedChoice.partiallyEquals(expectedChoice) }
 }
 
 private fun ClientChoice.partiallyEquals(expected: ClientChoice): String? {
