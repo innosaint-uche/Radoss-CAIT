@@ -111,7 +111,7 @@ internal object DatesMerge {
                             parseDate(
                                 language,
                                 referenceDateTime,
-                                sortedBy { it.position }.map { it.content }.joinToString(" "),
+                                sortedBy { it.position }.joinToString(" ") { it.content },
                             )
                                 ?: maxByOrNull { it.probability }!!
                         } else {

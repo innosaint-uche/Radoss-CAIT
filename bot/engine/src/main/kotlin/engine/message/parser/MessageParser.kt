@@ -75,7 +75,7 @@ object MessageParser {
     }
 
     internal fun elementsToString(elements: List<GenericMessage>): String {
-        return elements.map { elementToString(it) }.joinToString()
+        return elements.joinToString { elementToString(it) }
     }
 
     private fun elementToString(element: GenericMessage): String {
