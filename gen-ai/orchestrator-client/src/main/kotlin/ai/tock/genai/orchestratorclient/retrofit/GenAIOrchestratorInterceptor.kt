@@ -19,10 +19,13 @@ package ai.tock.genai.orchestratorclient.retrofit
 import ai.tock.genai.orchestratorclient.responses.ErrorResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import mu.KotlinLogging
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class GenAIOrchestratorInterceptor(private val jsonObjectMapper: ObjectMapper = jacksonObjectMapper()) : Interceptor {
+    private val logger = KotlinLogging.logger {}
+
     override fun intercept(chain: Interceptor.Chain): Response {
         try {
             // Proceed with the request
@@ -38,7 +41,7 @@ class GenAIOrchestratorInterceptor(private val jsonObjectMapper: ObjectMapper = 
             return response
         } catch (exc: Exception) {
             // Handle network or unexpected errors
-            exc.printStackTrace()
+            logger.error("GenAI Orchestrator Error", exc)
             throw exc
         }
     }
