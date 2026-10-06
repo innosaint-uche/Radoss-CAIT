@@ -779,3 +779,9 @@ img { max-width: 100%; display: block; }
   .hero__cta { flex-direction: column; }
   .btn--lg { width: 100%; }
 }
+
+/* ---- Accessibility ---- */
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
