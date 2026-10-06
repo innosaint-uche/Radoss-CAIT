@@ -592,7 +592,7 @@ class MessengerConnector internal constructor(
                     logger.info { "Get disabled webhook subscription, response: $getSubscriptionsResponse" }
                     val fields =
                         getSubscriptionsResponse.data.firstOrNull()?.fields?.let {
-                            it.map { it.name }.joinToString(",")
+                            it.joinToString(",") { it.name }
                         } ?: defaultFields
                     val callbackUrl =
                         property(
